@@ -11,7 +11,7 @@ built-in API request context.
 - Zod for runtime contract validation
 - Typed auth and booking API clients
 - Reusable test-data factory
-- Smoke and authentication starter tests
+- Smoke tests plus positive and negative authentication coverage
 - ESLint, Prettier, environment configuration, and GitHub Actions CI
 
 ## Project structure
