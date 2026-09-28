@@ -5,18 +5,24 @@ export const bookingDatesSchema = z.object({
   checkout: z.iso.date(),
 });
 
-export const bookingSchema = z.object({
-  bookingid: z.number().int().positive().optional(),
+const persistedBookingSchema = z.object({
   roomid: z.number().int().positive(),
   firstname: z.string().min(1),
   lastname: z.string().min(1),
   depositpaid: z.boolean(),
   bookingdates: bookingDatesSchema,
-  email: z.email(),
-  phone: z.string().min(1),
+});
+
+export const bookingInputSchema = persistedBookingSchema.extend({
+  email: z.email().optional(),
+  phone: z.string().min(1).optional(),
+});
+
+export const bookingSchema = persistedBookingSchema.extend({
+  bookingid: z.number().int().positive(),
 });
 
 export const bookingListSchema = z.array(bookingSchema);
 
 export type Booking = z.infer<typeof bookingSchema>;
-export type BookingInput = Omit<Booking, 'bookingid'>;
+export type BookingInput = z.infer<typeof bookingInputSchema>;

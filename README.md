@@ -52,6 +52,7 @@ Useful commands:
 ```bash
 npm test               # run the complete suite
 npm run test:smoke     # run tests tagged @smoke
+npm run test:booking   # run booking API tests
 npm run typecheck      # check TypeScript
 npm run lint           # check code quality
 npm run report         # open the last HTML report

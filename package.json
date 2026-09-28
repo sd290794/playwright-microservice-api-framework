@@ -7,6 +7,7 @@
     "test": "playwright test",
     "test:smoke": "playwright test --grep @smoke",
     "test:auth": "playwright test tests/auth",
+    "test:booking": "playwright test tests/booking",
     "test:debug": "PWDEBUG=1 playwright test --workers=1",
     "report": "playwright show-report",
     "typecheck": "tsc --noEmit",
