@@ -22,6 +22,11 @@ export const bookingSchema = persistedBookingSchema.extend({
   bookingid: z.number().int().positive(),
 });
 
+export const bookingUpdateResponseSchema = z.object({
+  bookingid: z.number().int().positive(),
+  booking: bookingSchema,
+});
+
 export const bookingListSchema = z.array(bookingSchema);
 
 export type Booking = z.infer<typeof bookingSchema>;

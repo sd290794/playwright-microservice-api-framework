@@ -2,12 +2,19 @@ import type { BookingInput } from '../contracts/booking.js';
 
 const toDateOnly = (date: Date): string => date.toISOString().substring(0, 10);
 
-export function buildBooking(overrides: Partial<BookingInput> = {}): BookingInput {
+interface BookingFactoryOptions {
+  daysFromNow?: number;
+  stayLengthInDays?: number;
+  overrides?: Partial<BookingInput>;
+}
+
+export function buildBooking(options: BookingFactoryOptions = {}): BookingInput {
+  const { daysFromNow = 7, stayLengthInDays = 2, overrides = {} } = options;
   const checkin = new Date();
-  checkin.setUTCDate(checkin.getUTCDate() + 7);
+  checkin.setUTCDate(checkin.getUTCDate() + daysFromNow);
 
   const checkout = new Date(checkin);
-  checkout.setUTCDate(checkout.getUTCDate() + 2);
+  checkout.setUTCDate(checkout.getUTCDate() + stayLengthInDays);
 
   return {
     roomid: 1,
