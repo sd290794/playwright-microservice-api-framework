@@ -10,6 +10,7 @@ built-in API request context.
 - TypeScript in strict mode
 - Zod for runtime contract validation
 - Typed auth and booking API clients
+- Strict runtime validation for success and error response contracts
 - Reusable test-data factory
 - Smoke tests plus positive and negative authentication coverage
 - ESLint, Prettier, environment configuration, and GitHub Actions CI

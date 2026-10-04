@@ -5,7 +5,7 @@ import type { BookingInput } from '../contracts/booking.js';
 export class BookingClient {
   public constructor(private readonly request: APIRequestContext) {}
 
-  public getAll(token: string, roomId?: number): Promise<APIResponse> {
+  public getAll(token: string | undefined, roomId?: number): Promise<APIResponse> {
     return this.request.get('booking/', {
       headers: this.authHeaders(token),
       params: roomId ? { roomid: roomId } : {},
@@ -19,9 +19,13 @@ export class BookingClient {
   }
 
   public create(token: string, booking: BookingInput): Promise<APIResponse> {
+    return this.createWithPayload(token, booking);
+  }
+
+  public createWithPayload(token: string, payload: unknown): Promise<APIResponse> {
     return this.request.post('booking/', {
       headers: this.authHeaders(token),
-      data: booking,
+      data: payload,
     });
   }
 
@@ -38,7 +42,7 @@ export class BookingClient {
     });
   }
 
-  private authHeaders(token: string): Record<string, string> {
-    return { Cookie: `token=${token}` };
+  private authHeaders(token: string | undefined): Record<string, string> {
+    return token ? { Cookie: `token=${token}` } : {};
   }
 }

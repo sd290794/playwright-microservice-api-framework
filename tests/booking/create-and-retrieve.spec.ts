@@ -6,7 +6,7 @@ import { expect, test } from '../fixtures/api.fixture.js';
 test.describe('Booking creation and retrieval', () => {
   test('creates a booking and retrieves it by ID', async ({ authClient, bookingClient }) => {
     const token = await authClient.login(env.API_USERNAME, env.API_PASSWORD);
-    const bookingInput = buildBooking();
+    const bookingInput = buildBooking({ daysFromNow: 75 });
     let bookingId: number | undefined;
 
     try {
