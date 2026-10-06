@@ -9,7 +9,7 @@ built-in API request context.
 - Playwright Test for API execution, assertions, reports, retries, and fixtures
 - TypeScript in strict mode
 - Zod for runtime contract validation
-- Typed auth and booking API clients
+- Typed auth, booking, and room API clients
 - Strict runtime validation for success and error response contracts
 - Reusable test-data factory
 - Smoke tests plus positive and negative authentication coverage
@@ -27,7 +27,9 @@ built-in API request context.
 │   └── data/                # Test-data builders
 ├── tests/
 │   ├── auth/                # Authentication scenarios
+│   ├── booking/             # Booking lifecycle and contract scenarios
 │   ├── fixtures/            # Shared Playwright fixtures
+│   ├── room/                # Room service scenarios
 │   └── smoke/               # Fast service checks
 ├── .env.example
 ├── playwright.config.ts
@@ -54,6 +56,7 @@ Useful commands:
 npm test               # run the complete suite
 npm run test:smoke     # run tests tagged @smoke
 npm run test:booking   # run booking API tests
+npm run test:room      # run room API tests
 npm run typecheck      # check TypeScript
 npm run lint           # check code quality
 npm run report         # open the last HTML report
