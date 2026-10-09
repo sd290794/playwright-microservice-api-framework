@@ -11,7 +11,7 @@ built-in API request context.
 - Zod for runtime contract validation
 - Typed auth, booking, and room API clients
 - Strict runtime validation for success and error response contracts
-- Reusable test-data factory
+- Reusable and deterministic booking-data builders
 - Smoke tests plus positive and negative authentication coverage
 - ESLint, Prettier, environment configuration, and GitHub Actions CI
 
@@ -28,6 +28,7 @@ built-in API request context.
 ├── tests/
 │   ├── auth/                # Authentication scenarios
 │   ├── booking/             # Booking lifecycle and contract scenarios
+│   ├── data/                # Test-data builder unit tests
 │   ├── fixtures/            # Shared Playwright fixtures
 │   ├── room/                # Room service scenarios
 │   └── smoke/               # Fast service checks
@@ -56,6 +57,7 @@ Useful commands:
 npm test               # run the complete suite
 npm run test:smoke     # run tests tagged @smoke
 npm run test:booking   # run booking API tests
+npm run test:data      # run test-data builder unit tests
 npm run test:room      # run room API tests
 npm run typecheck      # check TypeScript
 npm run lint           # check code quality
