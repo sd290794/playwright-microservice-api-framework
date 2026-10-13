@@ -15,28 +15,6 @@ built-in API request context.
 - Smoke tests plus positive and negative authentication coverage
 - ESLint, Prettier, environment configuration, and GitHub Actions CI
 
-## Project structure
-
-```text
-.
-├── .github/workflows/       # CI pipeline
-├── src/
-│   ├── clients/             # HTTP calls grouped by microservice
-│   ├── config/              # Validated environment configuration
-│   ├── contracts/           # API types and runtime schemas
-│   └── data/                # Test-data builders
-├── tests/
-│   ├── auth/                # Authentication scenarios
-│   ├── booking/             # Booking lifecycle and contract scenarios
-│   ├── data/                # Test-data builder unit tests
-│   ├── fixtures/            # Shared Playwright fixtures
-│   ├── room/                # Room service scenarios
-│   └── smoke/               # Fast service checks
-├── .env.example
-├── playwright.config.ts
-└── tsconfig.json
-```
-
 ## Getting started
 
 Prerequisites: Node.js 20 or newer.
@@ -67,18 +45,33 @@ npm run report         # open the last HTML report
 API-only tests do not require Playwright browser binaries. Install browsers later only if this
 repository grows to include UI tests.
 
+## Test reports
+
+Every Playwright test command generates the following reports:
+
+- A concise list report in the terminal
+- An HTML report at `playwright-report/index.html`
+- A JUnit XML report at `test-results/junit.xml` for CI and test-management integrations
+
+Open the most recent HTML report locally with:
+
+```bash
+npm run report
+```
+
+When a test fails, Playwright retains its trace under `test-results/`. Open a trace with:
+
+```bash
+npx playwright show-trace test-results/<test-folder>/trace.zip
+```
+
+The GitHub Actions workflow uploads the HTML report as the `playwright-report` artifact after every
+CI run, including failed runs, and retains it for 14 days. Generated reports and test results are
+excluded from Git so they are not committed to the repository.
+
 ## Adding the first booking workflow
 
 Use the existing `AuthClient` to obtain a token, `buildBooking()` to create unique test data, and
 `BookingClient` to create/read/update/delete the booking. Keep assertions in the spec and HTTP
 details in the client. Always delete records created by a test in a `finally` block so the shared
 training environment stays clean.
-
-## Suggested GitHub repository
-
-- Repository name: `playwright-microservice-api-framework`
-- Description: `Playwright + TypeScript API automation framework for the Restful Booker Platform`
-- Suggested topics: `playwright`, `typescript`, `api-testing`, `test-automation`, `microservices`
-
-Do not commit `.env`, reports, test output, or real credentials. The credentials in
-`.env.example` are the documented public training credentials for Restful Booker Platform.
